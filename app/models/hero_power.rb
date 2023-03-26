@@ -7,6 +7,6 @@ class HeroPower < ApplicationRecord
     acceptance: { accept: ["Strong", "Weak", "Average"] }
   }
 
-  validates :power_id, presence: true
-  validates :hero_id, presence: true
+  # validates :power_id, presence: true
+  # validates :hero_id, presence: true
 end
