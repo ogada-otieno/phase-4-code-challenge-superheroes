@@ -3,13 +3,13 @@ class HerosController < ApplicationController
     # GET /heroes
     def index
         heroes = Hero.all
-        render json: heroes, except: ['powers'], status: :ok
+        render json: heroes, status: :ok
     end
 
     # GET /heroes/:id
     def show
         hero = Hero.find(params[:id])
-        render json: hero, include: :powers, status: :ok
+        render json: hero, serializer: HeroPowerSerializer, status: :ok
     end
 
     private

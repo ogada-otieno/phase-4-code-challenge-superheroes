@@ -4,9 +4,9 @@ class HeroPower < ApplicationRecord
  
   validates :strength, {
     presence: true,
-    acceptance: { 
-      accept: ["Strong", "Weak", "Average"],
-      message: "The strength value should be 'Strong', 'Weak' or 'Average'"
+    inclusion: { 
+      in: %w(Strong Weak Average),
+      message: "%{value} is not a valid strength. User 'Strong', 'Weak' or 'Average'"
      }
   }
 end

@@ -4,20 +4,20 @@ class PowersController < ApplicationController
     #  GET /powers
     def index
         powers = Power.all
-        render json: powers, status: :ok
+        render json: powers, status: :ok, except: [:created_at, :updated_at]
     end
 
     # GET /powers/:id
     def show
         power = find_power
-        render json: power, status: :ok
+        render json: power, status: :ok, except: [:created_at, :updated_at]
     end
 
     # PATCH /powers/:id
     def update
         power  = find_power
         power.update(power_params)
-        render json: power, status: 201
+        render json: power, status: 201, except: [:created_at, :updated_at]
     end
 
     private
@@ -27,7 +27,7 @@ class PowersController < ApplicationController
     end
 
     def power_params
-        params.permit(:name, :description)
+        params.permit(:description)
     end
 
     def not_found_response
