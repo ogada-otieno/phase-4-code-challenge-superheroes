@@ -4,9 +4,9 @@ class HeroPower < ApplicationRecord
  
   validates :strength, {
     presence: true,
-    acceptance: { accept: ["Strong", "Weak", "Average"] }
+    acceptance: { 
+      accept: ["Strong", "Weak", "Average"],
+      message: "The strength value should be 'Strong', 'Weak' or 'Average'"
+     }
   }
-
-  # validates :power_id, presence: true
-  # validates :hero_id, presence: true
 end

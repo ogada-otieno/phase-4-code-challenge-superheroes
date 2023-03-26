@@ -5295,3 +5295,46 @@ Processing by HeroPowersController#create as */*
 Completed 422 Unprocessable Entity in 18ms (Views: 0.9ms | ActiveRecord: 1.7ms | Allocations: 12272)
 
 
+Started GET "/powers/2" for 127.0.0.1 at 2023-03-26 17:12:38 +0300
+Processing by PowersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Power (0.31ms)
+Completed 200 OK in 12ms (Views: 1.1ms | ActiveRecord: 0.9ms | Allocations: 5156)
+
+
+Started POST "/hero_powers" for 127.0.0.1 at 2023-03-26 17:19:22 +0300
+Processing by HeroPowersController#create as */*
+  Parameters: {"strength"=>"Not Average", "power_id"=>10, "hero_id"=>10, "hero_power"=>{"strength"=>"Not Average", "power_id"=>10, "hero_id"=>10}}
+[31mUnpermitted parameter: :hero_power. Context: { controller: HeroPowersController, action: create, request: #<ActionDispatch::Request:0x00007f3ffed84a10>, params: {"strength"=>"Not Average", "power_id"=>10, "hero_id"=>10, "controller"=>"hero_powers", "action"=>"create", "hero_power"=>{"strength"=>"Not Average", "power_id"=>10, "hero_id"=>10}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mHero Load (0.1ms)[0m  [1m[34mSELECT "heros".* FROM "heros" WHERE "heros"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.34ms)
+Completed 422 Unprocessable Entity in 19ms (Views: 0.8ms | ActiveRecord: 1.4ms | Allocations: 12667)
+
+
+Started POST "/hero_powers" for 127.0.0.1 at 2023-03-26 17:20:21 +0300
+Processing by HeroPowersController#create as */*
+  Parameters: {"strength"=>"Average", "power_id"=>10, "hero_id"=>10, "hero_power"=>{"strength"=>"Average", "power_id"=>10, "hero_id"=>10}}
+[31mUnpermitted parameter: :hero_power. Context: { controller: HeroPowersController, action: create, request: #<ActionDispatch::Request:0x00007f3ffe8a17f0>, params: {"strength"=>"Average", "power_id"=>10, "hero_id"=>10, "controller"=>"hero_powers", "action"=>"create", "hero_power"=>{"strength"=>"Average", "power_id"=>10, "hero_id"=>10}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mHero Load (0.1ms)[0m  [1m[34mSELECT "heros".* FROM "heros" WHERE "heros"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "power_id", "hero_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["power_id", 10], ["hero_id", 10], ["created_at", "2023-03-26 14:20:21.853622"], ["updated_at", "2023-03-26 14:20:21.853622"]]
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (14.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with HeroPower (0.59ms)
+Completed 201 Created in 36ms (Views: 1.9ms | ActiveRecord: 16.2ms | Allocations: 13370)
+
+

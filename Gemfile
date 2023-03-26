@@ -7,7 +7,7 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.18'
 
 gem 'faker', '~> 3.1', '>= 3.1.1'
 
-gem 'active_model_serializers'
+# gem 'active_model_serializers'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
