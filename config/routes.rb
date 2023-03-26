@@ -5,8 +5,4 @@ Rails.application.routes.draw do
   # heroes 
   get '/heroes', to: 'heros#index'
   get 'heroes/:id', to: 'heros#show'
-
-  # powers
-  # get '/powers', to: 'powers#index'
-  # get 'powers/:id', to: 'powers#show'
 end
