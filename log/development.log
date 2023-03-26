@@ -5338,3 +5338,270 @@ Processing by HeroPowersController#create as */*
 Completed 201 Created in 36ms (Views: 1.9ms | ActiveRecord: 16.2ms | Allocations: 13370)
 
 
+Started POST "/hero_powers" for 127.0.0.1 at 2023-03-26 17:23:27 +0300
+Processing by HeroPowersController#create as */*
+  Parameters: {"strength"=>"Weak", "power_id"=>11, "hero_id"=>10, "hero_power"=>{"strength"=>"Weak", "power_id"=>11, "hero_id"=>10}}
+[31mUnpermitted parameter: :hero_power. Context: { controller: HeroPowersController, action: create, request: #<ActionDispatch::Request:0x00007f3ffe4a30b8>, params: {"strength"=>"Weak", "power_id"=>11, "hero_id"=>10, "controller"=>"hero_powers", "action"=>"create", "hero_power"=>{"strength"=>"Weak", "power_id"=>11, "hero_id"=>10}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mHero Load (0.1ms)[0m  [1m[34mSELECT "heros".* FROM "heros" WHERE "heros"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "power_id", "hero_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["power_id", 11], ["hero_id", 10], ["created_at", "2023-03-26 14:23:27.112358"], ["updated_at", "2023-03-26 14:23:27.112358"]]
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (17.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with HeroPower (0.36ms)
+Completed 201 Created in 25ms (Views: 0.9ms | ActiveRecord: 17.4ms | Allocations: 3653)
+
+
+Started GET "/heroes" for 127.0.0.1 at 2023-03-26 17:24:15 +0300
+Processing by HerosController#index as */*
+  Parameters: {"strength"=>"Weak", "power_id"=>11, "hero_id"=>10, "hero"=>{}}
+  [1m[36mHero Load (0.2ms)[0m  [1m[34mSELECT "heros".* FROM "heros"[0m
+  ↳ app/controllers/heros_controller.rb:6:in `index'
+No serializer found for resource: #<Hero id: 1, name: "Xeron", super_name: "Sorcery", created_at: "2023-03-26 12:31:25.685984000 +0000", updated_at: "2023-03-26 12:31:25.685984000 +0000">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Hero::ActiveRecord_Relation (1.03ms)
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms | Allocations: 1985)
+
+
+Started GET "/heroes/1" for 127.0.0.1 at 2023-03-26 17:24:24 +0300
+Processing by HerosController#show as */*
+  Parameters: {"strength"=>"Weak", "power_id"=>11, "hero_id"=>10, "id"=>"1", "hero"=>{}}
+  [1m[36mHero Load (0.1ms)[0m  [1m[34mSELECT "heros".* FROM "heros" WHERE "heros"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/heros_controller.rb:11:in `show'
+[active_model_serializers]   [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" INNER JOIN "hero_powers" ON "powers"."id" = "hero_powers"."power_id" WHERE "hero_powers"."hero_id" = ?[0m  [["hero_id", 1]]
+[active_model_serializers]   ↳ app/controllers/heros_controller.rb:12:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hero (2.78ms)
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.2ms | Allocations: 2589)
+
+
+Started GET "/powers" for 127.0.0.1 at 2023-03-26 17:27:28 +0300
+Processing by PowersController#index as */*
+  Parameters: {"strength"=>"Weak", "power_id"=>11, "hero_id"=>10, "power"=>{}}
+  [1m[36mPower Load (0.2ms)[0m  [1m[34mSELECT "powers".* FROM "powers"[0m
+  ↳ app/controllers/powers_controller.rb:7:in `index'
+No serializer found for resource: #<Power id: 1, name: "Infinity Stones Thanos", description: "Eternals Skilled hand-to-hand combatant Plasma ene...", created_at: "2023-03-26 12:31:25.824287000 +0000", updated_at: "2023-03-26 13:11:46.537227000 +0000">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Power::ActiveRecord_Relation (2.08ms)
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.2ms | Allocations: 3060)
+
+
+Started GET "/powers/1" for 127.0.0.1 at 2023-03-26 17:28:10 +0300
+Processing by PowersController#show as */*
+  Parameters: {"strength"=>"Weak", "power_id"=>11, "hero_id"=>10, "id"=>"1", "power"=>{}}
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Power (0.21ms)
+Completed 200 OK in 2ms (Views: 0.5ms | ActiveRecord: 0.1ms | Allocations: 782)
+
+
+Started GET "/powers/100" for 127.0.0.1 at 2023-03-26 17:28:18 +0300
+Processing by PowersController#show as */*
+  Parameters: {"strength"=>"Weak", "power_id"=>11, "hero_id"=>10, "id"=>"100", "power"=>{}}
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 100], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.05ms)
+Completed 404 Not Found in 1ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 617)
+
+
+Started GET "/powers/20" for 127.0.0.1 at 2023-03-26 17:28:39 +0300
+Processing by PowersController#show as */*
+  Parameters: {"strength"=>"Weak", "power_id"=>11, "hero_id"=>10, "id"=>"20", "power"=>{}}
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Power (0.2ms)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.1ms | Allocations: 687)
+
+
+Started GET "/powers/20" for 127.0.0.1 at 2023-03-26 17:28:54 +0300
+Processing by PowersController#show as */*
+  Parameters: {"description"=>"Updated description", "id"=>"20", "power"=>{"description"=>"Updated description"}}
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Power (0.2ms)
+Completed 200 OK in 2ms (Views: 0.5ms | ActiveRecord: 0.1ms | Allocations: 687)
+
+
+Started PATCH "/powers/20" for 127.0.0.1 at 2023-03-26 17:29:05 +0300
+Processing by PowersController#update as */*
+  Parameters: {"description"=>"Updated description", "id"=>"20", "power"=>{"description"=>"Updated description"}}
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[31mUnpermitted parameters: :id, :power. Context: { controller: PowersController, action: update, request: #<ActionDispatch::Request:0x00007f3ffd950fd0>, params: {"description"=>"Updated description", "controller"=>"powers", "action"=>"update", "id"=>"20", "power"=>{"description"=>"Updated description"}} }[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Power (0.2ms)
+Completed 201 Created in 3ms (Views: 0.7ms | ActiveRecord: 0.1ms | Allocations: 1028)
+
+
+Started GET "/powers/20" for 127.0.0.1 at 2023-03-26 17:29:11 +0300
+Processing by PowersController#show as */*
+  Parameters: {"description"=>"Updated description", "id"=>"20", "power"=>{"description"=>"Updated description"}}
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Power (0.22ms)
+Completed 200 OK in 2ms (Views: 0.6ms | ActiveRecord: 0.1ms | Allocations: 689)
+
+
+Started PATCH "/powers/20" for 127.0.0.1 at 2023-03-26 17:29:25 +0300
+Processing by PowersController#update as */*
+  Parameters: {"description"=>"Updated description", "id"=>"20", "power"=>{"description"=>"Updated description"}}
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[31mUnpermitted parameters: :id, :power. Context: { controller: PowersController, action: update, request: #<ActionDispatch::Request:0x00007f3ffdd1f558>, params: {"description"=>"Updated description", "controller"=>"powers", "action"=>"update", "id"=>"20", "power"=>{"description"=>"Updated description"}} }[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Power (0.15ms)
+Completed 201 Created in 2ms (Views: 0.5ms | ActiveRecord: 0.1ms | Allocations: 955)
+
+
+Started GET "/powers/20" for 127.0.0.1 at 2023-03-26 17:29:35 +0300
+Processing by PowersController#show as */*
+  Parameters: {"description"=>"Updated description", "id"=>"20", "power"=>{"description"=>"Updated description"}}
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Power (0.27ms)
+Completed 200 OK in 2ms (Views: 0.7ms | ActiveRecord: 0.1ms | Allocations: 689)
+
+
+Started PATCH "/powers/20" for 127.0.0.1 at 2023-03-26 17:30:48 +0300
+Processing by PowersController#update as */*
+  Parameters: {"description"=>"Updated description and tested for any validation", "id"=>"20", "power"=>{"description"=>"Updated description and tested for any validation"}}
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[31mUnpermitted parameters: :id, :power. Context: { controller: PowersController, action: update, request: #<ActionDispatch::Request:0x00007f3ffdc5c490>, params: {"description"=>"Updated description and tested for any validation", "controller"=>"powers", "action"=>"update", "id"=>"20", "power"=>{"description"=>"Updated description and tested for any validation"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/powers_controller.rb:19:in `update'
+  [1m[36mPower Update (0.3ms)[0m  [1m[33mUPDATE "powers" SET "description" = ?, "updated_at" = ? WHERE "powers"."id" = ?[0m  [["description", "Updated description and tested for any validation"], ["updated_at", "2023-03-26 14:30:48.079032"], ["id", 20]]
+  ↳ app/controllers/powers_controller.rb:19:in `update'
+  [1m[36mTRANSACTION (13.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/powers_controller.rb:19:in `update'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Power (0.15ms)
+Completed 201 Created in 19ms (Views: 0.5ms | ActiveRecord: 13.6ms | Allocations: 2473)
+
+
+Started GET "/powers/20" for 127.0.0.1 at 2023-03-26 17:31:02 +0300
+Processing by PowersController#show as HTML
+  Parameters: {"id"=>"20"}
+  [1m[36mPower Load (0.2ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Power (0.46ms)
+Completed 200 OK in 3ms (Views: 1.0ms | ActiveRecord: 0.2ms | Allocations: 683)
+
+
+Started PATCH "/powers/20" for 127.0.0.1 at 2023-03-26 17:31:07 +0300
+Processing by PowersController#update as */*
+  Parameters: {"description"=>"Updated description and tested for any validation", "id"=>"20", "power"=>{"description"=>"Updated description and tested for any validation"}}
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[31mUnpermitted parameters: :id, :power. Context: { controller: PowersController, action: update, request: #<ActionDispatch::Request:0x00007f3ffdaed3c0>, params: {"description"=>"Updated description and tested for any validation", "controller"=>"powers", "action"=>"update", "id"=>"20", "power"=>{"description"=>"Updated description and tested for any validation"}} }[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Power (0.25ms)
+Completed 201 Created in 3ms (Views: 0.9ms | ActiveRecord: 0.1ms | Allocations: 928)
+
+
+Started GET "/powers/20" for 127.0.0.1 at 2023-03-26 17:31:17 +0300
+Processing by PowersController#show as */*
+  Parameters: {"description"=>"Updated description and tested for any validation", "id"=>"20", "power"=>{"description"=>"Updated description and tested for any validation"}}
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Power (0.23ms)
+Completed 200 OK in 2ms (Views: 0.6ms | ActiveRecord: 0.1ms | Allocations: 689)
+
+
+Started POST "/powers/hero_powers" for 127.0.0.1 at 2023-03-26 17:32:11 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/powers/hero_powers"):
+  
+Started GET "/powers" for 127.0.0.1 at 2023-03-26 17:32:54 +0300
+Processing by PowersController#index as HTML
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers"[0m
+  ↳ app/controllers/powers_controller.rb:7:in `index'
+No serializer found for resource: #<Power id: 1, name: "Infinity Stones Thanos", description: "Eternals Skilled hand-to-hand combatant Plasma ene...", created_at: "2023-03-26 12:31:25.824287000 +0000", updated_at: "2023-03-26 13:11:46.537227000 +0000">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Power::ActiveRecord_Relation (3.02ms)
+Completed 200 OK in 5ms (Views: 4.9ms | ActiveRecord: 0.1ms | Allocations: 2956)
+
+
+Started GET "/heroes" for 127.0.0.1 at 2023-03-26 17:33:13 +0300
+Processing by HerosController#index as HTML
+  [1m[36mHero Load (0.1ms)[0m  [1m[34mSELECT "heros".* FROM "heros"[0m
+  ↳ app/controllers/heros_controller.rb:6:in `index'
+No serializer found for resource: #<Hero id: 1, name: "Xeron", super_name: "Sorcery", created_at: "2023-03-26 12:31:25.685984000 +0000", updated_at: "2023-03-26 12:31:25.685984000 +0000">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Hero::ActiveRecord_Relation (1.12ms)
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.1ms | Allocations: 1877)
+
+
+Started GET "/heroes/1" for 127.0.0.1 at 2023-03-26 17:33:38 +0300
+Processing by HerosController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mHero Load (0.1ms)[0m  [1m[34mSELECT "heros".* FROM "heros" WHERE "heros"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/heros_controller.rb:11:in `show'
+[active_model_serializers]   [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" INNER JOIN "hero_powers" ON "powers"."id" = "hero_powers"."power_id" WHERE "hero_powers"."hero_id" = ?[0m  [["hero_id", 1]]
+[active_model_serializers]   ↳ app/controllers/heros_controller.rb:12:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hero (4.36ms)
+Completed 200 OK in 6ms (Views: 4.8ms | ActiveRecord: 0.3ms | Allocations: 1997)
+
+
+Started GET "/heroes" for 127.0.0.1 at 2023-03-26 17:33:51 +0300
+Processing by HerosController#index as HTML
+  [1m[36mHero Load (0.2ms)[0m  [1m[34mSELECT "heros".* FROM "heros"[0m
+  ↳ app/controllers/heros_controller.rb:6:in `index'
+No serializer found for resource: #<Hero id: 1, name: "Xeron", super_name: "Sorcery", created_at: "2023-03-26 12:31:25.685984000 +0000", updated_at: "2023-03-26 12:31:25.685984000 +0000">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Hero::ActiveRecord_Relation (1.12ms)
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.2ms | Allocations: 1877)
+
+
+Started GET "/powers" for 127.0.0.1 at 2023-03-26 17:33:54 +0300
+Processing by PowersController#index as HTML
+  [1m[36mPower Load (0.3ms)[0m  [1m[34mSELECT "powers".* FROM "powers"[0m
+  ↳ app/controllers/powers_controller.rb:7:in `index'
+No serializer found for resource: #<Power id: 1, name: "Infinity Stones Thanos", description: "Eternals Skilled hand-to-hand combatant Plasma ene...", created_at: "2023-03-26 12:31:25.824287000 +0000", updated_at: "2023-03-26 13:11:46.537227000 +0000">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Power::ActiveRecord_Relation (2.25ms)
+Completed 200 OK in 5ms (Views: 4.8ms | ActiveRecord: 0.3ms | Allocations: 2957)
+
+
+Started GET "/powers/1" for 127.0.0.1 at 2023-03-26 17:33:55 +0300
+Processing by PowersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPower Load (0.1ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Power (0.47ms)
+Completed 200 OK in 3ms (Views: 1.2ms | ActiveRecord: 0.1ms | Allocations: 683)
+
+
+Started POST "/powers/hero_powers" for 127.0.0.1 at 2023-03-26 17:36:40 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/powers/hero_powers"):
+  
+Started POST "/powers/hero_powers" for 127.0.0.1 at 2023-03-26 17:37:58 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/powers/hero_powers"):
+  
+Started GET "/powers/hero_powers/" for 127.0.0.1 at 2023-03-26 17:38:09 +0300
+Processing by PowersController#show as HTML
+  Parameters: {"id"=>"hero_powers"}
+  [1m[36mPower Load (0.2ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/powers_controller.rb:26:in `find_power'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.14ms)
+Completed 404 Not Found in 18ms (Views: 1.4ms | ActiveRecord: 1.6ms | Allocations: 3993)
+
+
+Started POST "/powers/hero_powers" for 127.0.0.1 at 2023-03-26 17:39:25 +0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [POST] "/powers/hero_powers"):
+  
+Started POST "/hero_powers" for 127.0.0.1 at 2023-03-26 17:40:20 +0300
+Processing by HeroPowersController#create as */*
+  Parameters: {"strength"=>"Average", "power_id"=>1, "hero_id"=>1, "hero_power"=>{"strength"=>"Average", "power_id"=>1, "hero_id"=>1}}
+[31mUnpermitted parameter: :hero_power. Context: { controller: HeroPowersController, action: create, request: #<ActionDispatch::Request:0x00007fac0c9b6120>, params: {"strength"=>"Average", "power_id"=>1, "hero_id"=>1, "controller"=>"hero_powers", "action"=>"create", "hero_power"=>{"strength"=>"Average", "power_id"=>1, "hero_id"=>1}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mPower Load (0.2ms)[0m  [1m[34mSELECT "powers".* FROM "powers" WHERE "powers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mHero Load (0.1ms)[0m  [1m[34mSELECT "heros".* FROM "heros" WHERE "heros"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "power_id", "hero_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["power_id", 1], ["hero_id", 1], ["created_at", "2023-03-26 14:40:20.887921"], ["updated_at", "2023-03-26 14:40:20.887921"]]
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (6.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/hero_powers_controller.rb:5:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with HeroPower (1.61ms)
+Completed 201 Created in 141ms (Views: 6.4ms | ActiveRecord: 8.4ms | Allocations: 76964)
+
+
