@@ -24,7 +24,7 @@ puts "Creating powers..."
 20.times do
     # name and description
     name = Faker::Superhero.power
-    description = Faker::Lorem.sentences(number: 5)
+    description = Faker::Lorem.paragraph_by_chars(number: 25)
     Power.create(name: name, description: description)
 end
 
