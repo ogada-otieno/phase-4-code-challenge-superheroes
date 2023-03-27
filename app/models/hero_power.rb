@@ -6,7 +6,7 @@ class HeroPower < ApplicationRecord
     presence: true,
     inclusion: { 
       in: %w(Strong Weak Average),
-      message: "%{value} is not a valid strength. User 'Strong', 'Weak' or 'Average'"
+      message: "'%{value}' is not valid. User 'Strong', 'Weak' or 'Average'"
      }
   }
 end
