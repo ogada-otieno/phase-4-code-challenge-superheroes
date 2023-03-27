@@ -4,20 +4,20 @@ class PowersController < ApplicationController
     #  GET /powers
     def index
         powers = Power.all
-        render json: powers, status: :ok, except: [:created_at, :updated_at]
+        render json: powers, status: :ok
     end
 
     # GET /powers/:id
     def show
         power = find_power
-        render json: power, status: :ok, except: [:created_at, :updated_at]
+        render json: power, status: :ok
     end
 
     # PATCH /powers/:id
     def update
         power  = find_power
-        power.update(power_params)
-        render json: power, status: 201, except: [:created_at, :updated_at]
+        power.update!(power_params)
+        render json: power, status: 201
     end
 
     private
@@ -35,6 +35,6 @@ class PowersController < ApplicationController
     end
 
     def validation_errors(invalid)
-        render json: { errors: invalid.record.errors }, status: :unprocessable_entity
+        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
     end
 end

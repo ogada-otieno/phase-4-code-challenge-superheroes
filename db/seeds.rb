@@ -37,7 +37,7 @@ puts "Creating hero powers..."
     arr = ["Strong", "Weak", "Average"]
 
     # strength, power_id, and hero_id
-    strength = arr[rand(arr.count)]
+    strength = arr.sample
     power_id = rand(1..20)
     hero_id = rand(1..10)
     HeroPower.create(strength: strength, power_id: power_id, hero_id: hero_id)

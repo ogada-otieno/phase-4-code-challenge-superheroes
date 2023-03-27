@@ -3,7 +3,7 @@ class HeroPowersController < ApplicationController
     # POST /hero_powers
     def create
         hero_power = HeroPower.create!(hero_power_params)
-        render json: hero_power,  status: :created
+        render json: hero_power.hero,  status: :created, serializer: HeroPowerSerializer
     end
 
     private
@@ -13,6 +13,6 @@ class HeroPowersController < ApplicationController
     end
 
     def validation_errors(invalid)
-        render json: { errors: invalid.record.errors }, status: :unprocessable_entity
+        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
     end
 end
